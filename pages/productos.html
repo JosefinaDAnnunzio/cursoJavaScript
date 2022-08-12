@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head> 
+    <meta charset="UTF-8">
+    <title>Productos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body data-theme="light">
+    <article class="container">
+        <h1>Productos</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>DESCRIPCION</th>
+                    <th>IMPORTE</th>
+                    <th>FINAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>110</td>
+                    <td>Silla Escandinava</td>
+                    <td>5000.00</td>
+                    <td>6050.00</td>
+                </tr>
+                <tr>
+                    <td>111</td>
+                    <td>Mesa Rústica</td>
+                    <td>15000.00</td>
+                    <td>18150.00</td>
+                </tr>
+                <tr>
+                    <td>112</td>
+                    <td>Alacena</td>
+                    <td>10000.00</td>
+                    <td>12100.00</td>
+                </tr>
+                <tr>
+                    <td>113</td>
+                    <td>Mesa Escandinava</td>
+                    <td>20000.00</td>
+                    <td>24200.00</td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <button role="button" class="primary" onclick="buscarrProductos()">Buscar Productos</button>
+            <button role="button" class="primary" onclick="agregarProductos()">Agregar Productos</button>
+        </div>
+        <footer>
+        </footer>
+    </article>
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,13 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="es">
+<head> 
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Inicio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador con funciones</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"> 
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
-<body>
-
-<script src="js/index.js"></script>    
+<body data-theme="light">
+    <h1>Menú</h1>    
+    <article class="container">
+        <div>
+            <div>
+                <label>Categorías</label>
+                <select>
+                    <option value="" selected disabled>...</option>
+                    <option value="">Cocina</option>
+                    <option value="">Living</option>
+                    <option value="">Oficina</option>
+                </select>
+            </div>
+            <div>
+                <button class="button" onclick="listarCategorias()">Listar Categorías</button>
+                <button class="button" onclick="agregarCategoria()">Agregar Categoría</button>
+                <button class="button" onclick="buscarCategoria()">Buscar Categoría</button>
+                <button class="button button-delete" onclick="quitarCategoria()">Quitar Categoría</button>
+            </div>
+            <footer>
+                
+            </footer>
+        </div>
+    </article>
+    <script src="js/main.js"></script>
 </body>
 </html>
