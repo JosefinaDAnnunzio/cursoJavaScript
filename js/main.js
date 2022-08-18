@@ -7,7 +7,6 @@ const productos = [
 ]
 const IVA = 1.21
 
-//producto - OBJETO CONSTRUCTORA
 class Producto {
     constructor(id, descripcion, importe, stock) {
         this.id = id
@@ -37,11 +36,11 @@ function listarCategorias() {   //arrays categorias
 function agregarCategoria() {
     let nuevaCategoria = prompt("Ingresa una nueva categoría:")
     let resultado = categorias.includes(nuevaCategoria)
-        if (!resultado) { 
-            categorias.push(nuevaCategoria)
-        } else {
-            console.warn("La categoría", nuevaCategoria, "ya figura en la lista.")
-        }
+    if (!resultado) { 
+        categorias.push(nuevaCategoria)
+    } else {
+        console.warn("La categoría", nuevaCategoria, "ya figura en la lista.")
+    }
 }
 
 function quitarCategoria() {
@@ -55,7 +54,6 @@ function quitarCategoria() {
     }
 }
 
-//array de productos
 function generacionID() { return parseInt(Math.random() * 100000) }
 
 function agregarProductos() {
@@ -63,8 +61,8 @@ function agregarProductos() {
     let descripcion = prompt("Ingresa el nombre del Producto:")
     let importe = parseInt(prompt("Ingresa el importe:"))
     let stock = parseInt(prompt("Ingrese el stock:"))
-        productos.push(new Producto(id, descripcion, importe, stock))
-        console.table(productos)
+    productos.push(new Producto(id, descripcion, importe, stock))
+    console.table(productos)
 }
 
 function buscarProductos() {
@@ -73,3 +71,19 @@ function buscarProductos() {
     console.table(resultado)
 }
 
+const selectCategoria = document.querySelector("select")
+
+function cargarCategorias() {
+    categorias.sort()
+    categorias.forEach(categoria => {
+        selectCategoria.innerHTML += `<option value="">${categoria}</option>`
+    })
+}
+
+const botonListar = document.querySelector(".button")
+const botonAgregar = document.querySelector(".button.button-grey")
+const botonQuitar = document.querySelector(".button.button-delete")
+
+botonListar.addEventListener("click", listarCategorias)
+botonAgregar.addEventListener("click", agregarCategoria)
+botonQuitar.addEventListener("click", quitarCategoria)
