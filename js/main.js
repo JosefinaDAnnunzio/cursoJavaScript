@@ -27,10 +27,10 @@ const prod2 = new Producto ("111", "Mesa Rustica" , 15000, 10)
 const prod3 = new Producto ("112", "Alacena" , 10000, 20)
 const prod4 = new Producto ("113", "Mesa Escandinava" , 20000, 7)
 
-const nuevoProducto = document.getElementById(".agregarProd")
+// const nuevoProducto = document.getElementById(".agregarProd")
 
 function agregarProducto() {
-    let nuevoProducto = document.getElementById("productoAgregado")
+    let nuevoProducto = document.querySelector(".agregarProd")
     let resultado = productos.includes(nuevoProducto)
     if (!resultado) { 
         productos.push(nuevoProducto)
@@ -39,10 +39,10 @@ function agregarProducto() {
     }
 }
 
-const prod = document.getElementById("buscador")
+// const prod = document.getElementById("buscador")
 
 function buscarProductos() {
-    let prod = document.getElementById("buscador")
+    let prod = document.querySelector(".buscarProd")
     const resultado = productos.filter(producto => producto.descripcion.includes(prod))
     console.table(resultado)
 }
