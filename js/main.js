@@ -27,51 +27,24 @@ const prod2 = new Producto ("111", "Mesa Rustica" , 15000, 10)
 const prod3 = new Producto ("112", "Alacena" , 10000, 20)
 const prod4 = new Producto ("113", "Mesa Escandinava" , 20000, 7)
 
-function listarCategorias() {   //arrays categorias
-    for (let i = 0; i < categorias.length; i++) {
-        console.log(categorias[i])
-    }
-}
-
-function agregarCategoria() {
-    let nuevaCategoria = prompt("Ingresa una nueva categoría:")
-    let resultado = categorias.includes(nuevaCategoria)
+function agregarProducto() {
+    let nuevoProducto = document.getElementById(".agregarProd")
+    let resultado = productos.includes(nuevoProducto)
     if (!resultado) { 
-        categorias.push(nuevaCategoria)
+        productos.push(nuevoProducto)
     } else {
-        console.warn("La categoría", nuevaCategoria, "ya figura en la lista.")
+        return false
     }
-}
-
-function quitarCategoria() {
-    let aQuitar = prompt("Ingrese la categoría a quitar del array:")
-    let indice = categorias.indexOf(aQuitar)
-    if (indice !== -1) {
-        let resultado = categorias.splice(indice, 1)
-        console.warn("Se ha eliminado la categoría:", resultado)
-    } else {
-        console.error("No se ha encontrado la categoría", aQuitar)
-    }
-}
-
-function generacionID() { return parseInt(Math.random() * 100000) }
-
-function agregarProductos() {
-    let id = generacionID()
-    let descripcion = prompt("Ingresa el nombre del Producto:")
-    let importe = parseInt(prompt("Ingresa el importe:"))
-    let stock = parseInt(prompt("Ingrese el stock:"))
-    productos.push(new Producto(id, descripcion, importe, stock))
-    console.table(productos)
 }
 
 function buscarProductos() {
-    let prod = prompt ("Ingrese el producto a buscar:")
+    debugger
+    let prod = document.getElementById("buscador")
     const resultado = productos.filter(producto => producto.descripcion.includes(prod))
     console.table(resultado)
 }
 
-const selectCategoria = document.querySelector("select")
+const selectCategoria = document.querySelector(".selectCategorias")
 
 function cargarCategorias() {
     categorias.sort()
@@ -80,10 +53,18 @@ function cargarCategorias() {
     })
 }
 
-const botonListar = document.querySelector(".button")
-const botonAgregar = document.querySelector(".button.button-grey")
-const botonQuitar = document.querySelector(".button.button-delete")
+const botonAgregar = document.querySelector(".agregarProd")
+const botonBuscar = document.querySelector(".buscarProd")
 
-botonListar.addEventListener("click", listarCategorias)
-botonAgregar.addEventListener("click", agregarCategoria)
-botonQuitar.addEventListener("click", quitarCategoria)
+
+botonAgregar.addEventListener("click", agregarProducto)
+botonBuscar.addEventListener("click", buscarProductos)
+
+const contenido = document.getElementById("buscador").value;
+
+
+
+
+
+
+
