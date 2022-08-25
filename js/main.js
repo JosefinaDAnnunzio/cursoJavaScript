@@ -1,49 +1,20 @@
-const categorias = ["Cocina", "Living", "Oficina"]
-const productos = [
+const categorias = ["Cocina", "Living", "Oficina", "Baño", "Dormitorio"]
+const selectCategoria = document.querySelector(".selectCategorias")
+
+const productos = document.querySelector ("#articulos")
+const cantidad = document.querySelector ("#cantidades")
+const btnTotal = document.querySelector ("#totalizar")
+const importeFinal = document.querySelector("span")
+const btnEnviar = document.querySelector("span.guardar")
+
+const datosProductos = [
     {descripcion: "Silla Escandinava", precio: 5000},
     {descripcion: "Mesa Rustica", precio: 15000},
     {descripcion: "Alacena", precio: 10000},
     {descripcion: "Mesa Escandinava", precio: 20000},
 ]
+
 const IVA = 1.21
-
-class Producto {
-    constructor(id, descripcion, importe, stock) {
-        this.id = id
-        this.descripcion = descripcion.toUpperCase()
-        this.importe = importe
-        this.stock = stock
-    }
-    precioFinal() {
-        return '$ ' + parseFloat((this.importe * IVA).toFixed(2))
-    }
-    actualizarStock (unidades) {
-        this.stock = this.stock - unidades
-    }
-}
-
-const prod1 = new Producto ("110", "Silla Escandinava", 5000, 30)
-const prod2 = new Producto ("111", "Mesa Rustica" , 15000, 10)
-const prod3 = new Producto ("112", "Alacena" , 10000, 20)
-const prod4 = new Producto ("113", "Mesa Escandinava" , 20000, 7)
-
-function agregarProducto() {
-    let nuevoProducto = document.getElementById("productoAgregado").value
-    let resultado = productos.includes(nuevoProducto)
-    if (!resultado) { 
-        productos.push(nuevoProducto)
-    } else {
-        return false
-    }
-}
-
-function buscarProductos() {
-    let prod = document.getElementById("buscador").value
-    const resultado = productos.filter(producto => producto.descripcion.includes(prod))
-    console.table(resultado)
-}
-
-const selectCategoria = document.querySelector(".selectCategorias")
 
 function cargarCategorias() {
     categorias.sort()
@@ -52,9 +23,65 @@ function cargarCategorias() {
     })
 }
 
-const botonAgregar = document.querySelector(".agregarProd")
-const botonBuscar = document.querySelector(".buscarProd")
+class Carrito {
+    constructor(unidades, precioArticulo, impuesto){
+        this.unidades = parseInt(unidades)
+        this.precioArt = parseFloat(precioArticulo)
+        this.impuesto = parseFloat(impuesto)
+    }
+    totalizar () {
+        let resultado = (this.unidades * this.precioArt * this.impuesto).toFixed(2)
+        return '$ ' + resultado.toLocaleString()
+    }
+}
 
+const cargarCombo = (select, array)=> {
+    if (array.length > 0) {
+        array.forEach(elemento => {
+            select.innerHTML += `<option value="${elemento.precio}">${elemento.descripcion}</option>`
+        })
+    } else {
+        btnTotal.disabled = true
+    }
+}
 
-botonAgregar.addEventListener("click", agregarProducto)
-botonBuscar.addEventListener("click", buscarProductos)
+cargarCombo(productos, datosProductos)
+
+const datosCompletos = ()=> { 
+    if (productos.value !== "..." && parseInt(cantidad.value)) {
+        return true
+    } else {
+        return false 
+    }
+}
+
+const calcularTotal = ()=> { 
+    if (datosCompletos()) {
+        const totalAPagar = new Carrito (cantidad.value, productos.value, IVA)
+        importeFinal.innerText = totalAPagar.totalizar()
+        btnEnviar.classList.remove("ocultar")
+    } else {
+        return false
+    }
+}
+
+const enviarPorEmail = ()=> { 
+    const envio = {
+        fechaEnvio: new Date().toLocaleString(),
+        productos: productos[productos.selectedIndex].text,
+        cantidad: cantidad.value,
+        total: importeFinal.innerText
+    }
+    localStorage.setItem("UltimoEnvio", JSON.stringify(envio))
+    alert("✅ Enviado")
+    btnEnviar.classList.add("ocultar")
+}
+
+function recuperoDatos() {
+    productos.value = localStorage.getItem("productos")
+    cantidad.value = localStorage.getItem("cantidad")
+    total.value = localStorage.getItem("total")
+}
+
+btnTotal.addEventListener("click", calcularTotal)
+btnEnviar.addEventListener("click", enviarPorEmail)
