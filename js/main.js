@@ -12,6 +12,10 @@ const datosProductos = [
     {descripcion: "Mesa Rustica", precio: 15000},
     {descripcion: "Alacena", precio: 10000},
     {descripcion: "Mesa Escandinava", precio: 20000},
+    {descripcion: "Mesa Ratona", precio: 6000},
+    {descripcion: "Silla Rustica", precio: 7000},
+    {descripcion: "Cajonera", precio: 20000},
+    {descripcion: "Mueble de guardado", precio: 20000},
 ]
 
 const IVA = 1.21
@@ -73,7 +77,13 @@ const enviarPorEmail = ()=> {
         total: importeFinal.innerText
     }
     localStorage.setItem("UltimoEnvio", JSON.stringify(envio))
-    alert("✅ Enviado")
+    Swal.fire({
+        position: 'bottom-end',
+        icon: 'success',
+        title: 'Agregado al carrito',
+        showConfirmButton: false,
+        timer: 1500
+    }) 
     btnEnviar.classList.add("ocultar")
 }
 
@@ -85,3 +95,32 @@ function recuperoDatos() {
 
 btnTotal.addEventListener("click", calcularTotal)
 btnEnviar.addEventListener("click", enviarPorEmail)
+
+const mensaje = ()=>{
+    Swal.fire({
+        input: 'textarea',
+        inputLabel: 'Message',
+        inputPlaceholder: 'Type your message here...',
+        inputAttributes: {
+          'aria-label': 'Type your message here'
+        },
+        showCancelButton: true
+      })
+      
+      if (text) {
+        Swal.fire(text)
+      }
+}
+
+const ingresarEmail = ()=>{
+    Swal.fire({
+        title: 'Input email address',
+        input: 'email',
+        inputLabel: 'Your email address',
+        inputPlaceholder: 'Enter your email address'
+    })
+      
+    if (email) {
+        Swal.fire(`Entered email: ${email}`)
+    }
+}
