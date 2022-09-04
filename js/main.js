@@ -69,7 +69,7 @@ const calcularTotal = ()=> {
     }
 }
 
-const enviarPorEmail = ()=> { 
+const enviarCarrito = ()=> { 
     const envio = {
         fechaEnvio: new Date().toLocaleString(),
         productos: productos[productos.selectedIndex].text,
@@ -94,7 +94,7 @@ function recuperoDatos() {
 }
 
 btnTotal.addEventListener("click", calcularTotal)
-btnEnviar.addEventListener("click", enviarPorEmail)
+btnEnviar.addEventListener("click", enviarCarrito)
 
 const mensaje = ()=>{
     Swal.fire({
@@ -124,3 +124,65 @@ const ingresarEmail = ()=>{
         Swal.fire(`Entered email: ${email}`)
     }
 }
+
+const seccion = document.querySelector("section#contenido")
+const loader = document.querySelector("section.loader")
+const URL = "js/main.json"
+let baseDatos = []
+
+const peticionFetch = async ()=> {
+    const response = await fetch(URL)
+    const data = await response.json()
+    return data
+}
+
+const retornoCardContenido = (content)=> {
+    const {id, producto, imagen} = content
+    return `<div class="card"> <img id="${id}" src="${imagen}" alt="${producto}" title="${producto}" loading="lazy" onclick="guardarContenidoEnLS('${id}')"> </div>`
+}
+
+const retornoCardError = ()=> {
+    return `<div class="error-contenido"> <p>Parece que hubo un error. </p> <p>Intenta nuevamente en unos segundos...</p> </div>`
+}
+
+const cargarContenido = async ()=> {
+    let contenidoHTML = ""
+        try {
+            baseDatos = await peticionFetch()
+            baseDatos.forEach(content => {
+                contenidoHTML += retornoCardContenido(content)
+            })
+            seccion.innerHTML = contenidoHTML
+        } catch (error) {
+            seccion.innerHTML = retornoCardError()
+        } finally {
+            loader.innerHTML = ""
+        }
+}
+
+cargarContenido()    
+
+const guardarContenidoEnLS = (id)=> {
+    let resultado = baseDatos.find((contenido)=> contenido.id == id)
+        if (resultado) {
+            localStorage.setItem("detalle", JSON.stringify(resultado))
+            location.href = "index.html"
+        }
+}
+
+const detalle = document.querySelector("section#contenido")
+
+const retornoDetalle = (detalle)=> {
+    const {producto, imagen, precio} = detalle
+    return `<section id="contenido"> <h2>${producto}</h2> <img src="${imagen}" alt="${producto}" title="${producto}"> <p class="info">Precio</p> <p>${precio}</p> </section>`
+}
+
+const recuperoInfo = ()=> {
+    if (localStorage.detalle) {
+        const objDetalle = JSON.parse(localStorage.getItem("detalle"))
+              detalle.innerHTML = retornoDetalle(objDetalle)
+    } else {
+        detalle.innerHTML = retornoCardError()
+    }
+}
+recuperoInfo()

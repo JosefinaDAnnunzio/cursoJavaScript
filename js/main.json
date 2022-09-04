@@ -1,0 +1,50 @@
+[
+   {
+      "id": 1,
+      "imagen": "/assets/silla escandinava.jpg",
+      "producto": "Silla Escandinava",
+      "precio": "$ 5000"
+   },
+   {
+     "id": 2,
+     "imagen": "/assets/mesa rustica.jpg",
+     "producto": "Mesa Rústica",
+     "precio": "$ 15000"
+   },
+   {
+    "id": 3,
+    "imagen": "/assets/mesa escandinava.jpg",
+    "producto": "Mesa Escandinava",
+    "precio": "$ 20000"
+   },
+   {
+    "id": 4,
+    "imagen": "/assets/mueble guardado.jpg",
+    "producto": "Mueble de Guardado",
+    "precio": "$ 20000"
+   },
+   {
+    "id": 5,
+    "imagen": "/assets/alacena..jpg",
+    "producto": "Alacena",
+    "precio": "$10000"
+   },
+   {
+    "id": 6,
+    "imagen": "/assets/cajonera.jpg",
+    "producto": "Cajonera",
+    "precio": "$ 20000"
+   },
+   {
+      "id": 7,
+      "imagen": "/assets/mesa ratona.jpg",
+      "producto": "Mesa Ratona",
+      "precio": "$ 6000"
+  },
+  {
+   "id": 8,
+   "imagen": "/assets/silla rustica.jpg",
+   "producto": "Silla Rústica",
+   "precio": "Película"
+   }
+]

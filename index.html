@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head> 
+    <meta charset="UTF-8">
+    <title>Productos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body data-theme="light">
+    <article class="container">
+        <h1>Productos</h1>
+		<section class="loader">
+            <img src="/assets/progress-icon-gif.jpg" width="100px" title="Aguarda, por favor...">
+        </section>
+        <section id="contenido" class="store-wrapper">
+        </section>
+        <div>
+            <label for="categorias">Elige la categoría:</label>
+            <select name="" id="categorias" class="selectCategorias">
+                <option selected disabled>...</option>
+            </select>
+            <label for="articulos">Elige el producto:</label>
+            <select name="" id="articulos">
+                <option selected disabled>...</option>
+            </select>
+            <label for="cantidades">Ingresa la cantidad deseada:</label>
+            <input type="number" id="cantidades" min="1">
+            <div>
+                <button class="button" id="totalizar">Total $ :</button>
+            </div>
+            <div>
+                <p class="importeFinal">Importe a pagar: $
+                    <span>0.00</span><span class="guardar ocultar" title="Enviar por Email">🛒</span>
+                </p>
+            </div>
+        </div>
+        <footer>
+        </footer>
+    </article>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>

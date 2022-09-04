@@ -56,3 +56,13 @@ h1{
 	text-align: center;
 	text-decoration: none;
 }
+
+img{
+	width: 200px;
+}
+
+.store-wrapper{
+	display: inline-flex;
+	flex-wrap: wrap;
+	padding: 15px;
+}
